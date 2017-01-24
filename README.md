@@ -29,9 +29,11 @@ In order to fix this, I simulated shadows in the training data by shading
 random regions in the image.  This produced a model that was much more resilient to shadows and 
 
 Shadow on Track Two:
+
 ![Track Shadow](https://github.com/Justin-Kuehn/CarND-Behavioral-Cloning/blob/master/img/shadow.jpg)
 
 Simulated Shadow:
+
 ![Simulated Shadow](https://github.com/Justin-Kuehn/CarND-Behavioral-Cloning/blob/master/img/simshadow.png)
 
 ### Image Pre-processing
