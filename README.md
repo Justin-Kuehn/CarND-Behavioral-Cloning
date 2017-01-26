@@ -8,6 +8,19 @@ This was done as part of the
 ![](https://github.com/Justin-Kuehn/CarND-Behavioral-Cloning/blob/master/img/track1.gif)
 ![](https://github.com/Justin-Kuehn/CarND-Behavioral-Cloning/blob/master/img/track2.gif)
 
+## Usage
+
+**To train the model**
+```
+python model.py --directory <data_directory>
+```
+
+**To run the model**
+
+```
+python drive.py ./steering_model/model.json
+```
+
 ## Implementation
 
 ### Creating the Training Data
@@ -28,20 +41,23 @@ Simulated Shadow:
 
 ### Image Pre-processing
 
+I found that using the raw images collected by the simulator did not produce very good results, so employed several pre-processing methods.
+
+First I boost the gamma ranges in the image using the technique described here: 
+http://www.pyimagesearch.com/2015/10/05/opencv-gamma-correction/  
+I found that doing this helped significantly on the second track where there were many shadows occluding the track.  
+
+Next I clipped the top and bottom of the image to ensure that most of the image was of the road ahead and not background objects like trees or the sky.  This helps prevent outfitting by forcing the model to learn how to follow the contours of the roads instead of using track specific landmarks.
+
+Finally I resize the image to 64x64 pixels to speed up training and then normalized the values to lie between -1 and 1.
+
 
 ### Network Architecture
 
+I used the comma.ai steering model found here: https://github.com/commaai/research/blob/master/train_steering_model.py
 
-## Usage
+I experimented with several modifications, such as adding additional convolution layers, but ultimately found that the model described there was the most robust and trained the fastest.
 
-**To train the model**
-```
-python model.py --directory <data_directory>
-```
+The model contains three convolution layers each followed by a ELU activation function.  There is one fully connected layer with 512 nodes followed by a single output node.  Dropout are added between the last convolution and the output to help prevent over-fitting.
 
 
-**To run the model**
-
-```
-python drive.py ./steering_model/model.json
-```
