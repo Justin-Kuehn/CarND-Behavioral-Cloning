@@ -29,7 +29,7 @@ Creating a good set of training data proved to the hardest challenge in a traini
 
 In order to correct for the Left/Right imbalance I drove the track in reverse several times to create more right turn data and recorded additional passes on each turn going both ways.  I was also able to utilize the left and right side cameras. Since each of the side cameras is simply offset by an amount from the center,  I simply added a slight steering offset in the opposite direction.  I also randomly flipped the image and corresponding steering angle to produce even greater data variation.
 
-All these methods ended up working very well for the first track, which the trained model was able to run laps on indefinitely. However I found that the model would get confused by the shadows present in the second track. In order to fix this, I simulated shadows in the training data by shading random regions in the image.  This produced a model that was much more resilient to shadows and 
+All these methods ended up working very well for the first track, which the trained model was able to run laps on indefinitely. However I found that the model would get confused by the shadows present in the second track. In order to fix this, I simulated shadows in the training data by shading random regions in the image.  This produced a model that was much more resilient to shadows. 
 
 Shadow on Track Two:
 
