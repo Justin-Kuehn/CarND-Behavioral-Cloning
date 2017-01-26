@@ -29,7 +29,7 @@ Creating a good set of training data proved to the hardest challenge in a traini
 
 In order to correct for the Left/Right imbalance I drove the track in reverse several times to create more right turn data and recorded additional passes on each turn going both ways.  I was also able to utilize the left and right side cameras. Since each of the side cameras is simply offset by an amount from the center,  I simply added a slight steering offset in the opposite direction.  I also randomly flipped the image and corresponding steering angle to produce even greater data variation.
 
-All these methods ended up working very well for the first track, which the trained model was able to run lapson indefinitely. However I found that the model would get confused by the shadows present in the second track. In order to fix this, I simulated shadows in the training data by shading random regions in the image.  This produced a model that was much more resilient to shadows and 
+All these methods ended up working very well for the first track, which the trained model was able to run laps on indefinitely. However I found that the model would get confused by the shadows present in the second track. In order to fix this, I simulated shadows in the training data by shading random regions in the image.  This produced a model that was much more resilient to shadows and 
 
 Shadow on Track Two:
 
@@ -38,6 +38,7 @@ Shadow on Track Two:
 Simulated Shadow:
 
 ![Simulated Shadow](https://github.com/Justin-Kuehn/CarND-Behavioral-Cloning/blob/master/img/simshadow.png)
+
 
 ### Image Pre-processing
 
@@ -51,7 +52,6 @@ Next I clipped the top and bottom of the image to ensure that most of the image 
 
 Finally I resize the image to 64x64 pixels to speed up training and then normalized the values to lie between -1 and 1.
 
-
 ### Network Architecture
 
 I used the comma.ai steering model found here: https://github.com/commaai/research/blob/master/train_steering_model.py
@@ -60,4 +60,9 @@ I experimented with several modifications, such as adding additional convolution
 
 The model contains three convolution layers each followed by a ELU activation function.  There is one fully connected layer with 512 nodes followed by a single output node.  Dropout are added between the last convolution and the output to help prevent over-fitting.
 
+### Training the Model and Results
+
+I preformed a 90/10 split for training and validation data respectively to help prevent over-fitting the model.  Batches of 128 images were sampled randomly from the training set.  Experimentally I found the 4 epochs of training were sufficient and ended up with a MSE of  MSE of 0.0453 on the validation set after the final epoch.   
+
+In the end the trained model was able to preform laps on both tracks indefinintly.  Since track two was an entirely a new track, we can surmised that the model generalizes well.
 
