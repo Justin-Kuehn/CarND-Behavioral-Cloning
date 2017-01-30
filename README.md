@@ -64,5 +64,14 @@ The model contains three convolution layers each followed by a ELU activation fu
 
 I preformed a 90/10 split for training and validation data respectively to help prevent over-fitting the model.  Batches of 128 images were sampled randomly from the training set.  An ADAM optimizer was used with a learning rate of 0.0001.  I found that the lower learning rate over the default of 0.001 preformed better.  Experimentally I found the 4 epochs of training were sufficient and ended up with a MSE of  MSE of 0.0453 on the validation set after the final epoch.   
 
-In the end the trained model was able to preform laps on both tracks indefinintly.  Since track two was an entirely a new track, we can surmised that the model generalizes well.
+## Results
+
+**Track One:**
+
+[![](https://i.ytimg.com/vi/vo0urfZqfn4/hqdefault.jpg)](https://www.youtube.com/watch?v=vo0urfZqfn4)
+
+**Track Two:**
+
+[![](https://i.ytimg.com/vi/iikTwr_XE8E/hqdefault.jpg)](https://www.youtube.com/watch?v=iikTwr_XE8E)
+
 
