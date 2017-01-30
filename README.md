@@ -56,7 +56,7 @@ Finally I resize the image to 64x64 pixels to speed up training and then normali
 
 The network used was inspired by the comma.ai steering model found here: https://github.com/commaai/research/blob/master/train_steering_model.py
 
-The model contains three convolution layers each followed by a ELU activation function.  There is one fully connected layer with 512 nodes followed by a single output node.  Dropout are added between the last convolution and the output to help prevent over-fitting.
+The model contains three convolution layers each followed by a ELU activation function.  ELU's were used over RELU's for faster training. There is one fully connected layer with 512 nodes followed by a single output node.  Dropout are added between the last convolution and the output to help prevent over-fitting.
 
 ![Simulated Shadow](https://github.com/Justin-Kuehn/CarND-Behavioral-Cloning/blob/master/img/model.png)
 
@@ -66,13 +66,14 @@ The model contains three convolution layers each followed by a ELU activation fu
  * Layer Three: Convolution 5x5x64 with ELU activation and dropout of 20%
  * Flatten
  * Layer Four: Fully connected with 512 nodes with ELU activation and dropout of 50%
- * Output of one node
+ * Layer Five: Fully connected with one output node
 
 ### Training
 
-I preformed a 90/10 split for training and validation data respectively to help prevent over-fitting the model.  An ADAM optimizer was used with a learning rate of 0.0001.  I found that the lower learning rate over the default of 0.001 preformed better.  
+I preformed a 90/10 split for training and validation data respectively to help prevent over-fitting the model.  An ADAM optimizer was used with a learning rate of 0.0001.  I used a lower learning rate because I found that the the default learning rate of 0.001 stopped learning too quickly and MSE leveled out after only the first epoch.
 
-Batches of 128 images were sampled randomly from the training set.  Experimentally I found the 4 epochs of training each with 33093 total samples were sufficient and ended up with a MSE of 0.0453 on the validation set after the final epoch.
+Batches of 128 images were sampled randomly from the training set.  I trained only for four epochs each with 33093 total samples with a final MSE of 0.453 on the validation set.  I found that training more than four epochs continued to lower the MSE (mean squared error) of the validation set, however the real performance on both track one and two began to degrade sharply with the car often veering off the road. This indicated that MSE alone is a poor criteria to measure model fitness, in the end I stopped training well before the MSE leveled off. 
+
 
 ## Results
 
